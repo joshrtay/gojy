@@ -1,5 +1,5 @@
 
-# yogo
+# gojy
 
 [![Build status][travis-image]][travis-url]
 [![Git tag][git-image]][git-url]
@@ -8,20 +8,22 @@
 
 Go style control flow with yieldable actions.
 
+WIP [NOT READY]
+
 ## Installation
 
-    $ npm install yogo
+    $ npm install gojy
 
 ## Usage
 
 ```js
-var yogo = require('yogo')
+var gojy = require('gojy')
 
 ```
 
 ## API
 
-### yogo(arg)
+### gojy(arg)
 
 - `arg` -
 
@@ -31,11 +33,11 @@ var yogo = require('yogo')
 
 MIT
 
-[travis-image]: https://img.shields.io/travis/joshrtay/yogo.svg?style=flat-square
-[travis-url]: https://travis-ci.org/joshrtay/yogo
-[git-image]: https://img.shields.io/github/tag/joshrtay/yogo.svg?style=flat-square
-[git-url]: https://github.com/joshrtay/yogo
+[travis-image]: https://img.shields.io/travis/joshrtay/gojy.svg?style=flat-square
+[travis-url]: https://travis-ci.org/joshrtay/gojy
+[git-image]: https://img.shields.io/github/tag/joshrtay/gojy.svg?style=flat-square
+[git-url]: https://github.com/joshrtay/gojy
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: https://github.com/feross/standard
-[npm-image]: https://img.shields.io/npm/v/yogo.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/yogo
+[npm-image]: https://img.shields.io/npm/v/gojy.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/gojy
