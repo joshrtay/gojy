@@ -1,0 +1,27 @@
+{
+  "name": "gojy",
+  "description": "Go style control flow with yieldable actions.",
+  "repository": "git://github.com/joshrtay/gojy.git",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "postversion": "git push && git push --tags && npm publish --access=public"
+  },
+  "dependencies": {
+    "@f/channel": "^1.1.0",
+    "@f/flatten-gen": "^2.0.0",
+    "@f/gen-to-promise": "^1.2.0",
+    "@f/is-generator": "^1.3.2",
+    "@f/map-gen": "^1.6.0",
+    "@f/to-promise": "^1.1.2",
+    "poss": "^3.0.0"
+  },
+  "devDependencies": {
+    "@f/bind-middleware": "^1.1.1",
+    "@f/sleep": "^1.0.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-register": "^6.11.6",
+    "tape": "^4.2.2"
+  }
+}
