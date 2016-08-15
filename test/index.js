@@ -21,7 +21,7 @@ test('go should run async and return', (t) => {
       return 'foo'
     })
 
-    const [err, res] = yield poss(join(p))
+    const res = yield p
     t.equal(res, 'foo')
     t.end()
   })
