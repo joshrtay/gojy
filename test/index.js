@@ -5,9 +5,8 @@
 require("babel-polyfill")
 
 const test = require('tape')
-const {dispatch, go, join, poss, delay, select, kill} = require('..')
+const {run, go, join, poss, delay, select, kill, forEach} = require('..')
 const bind = require('@f/bind-middleware')
-const sleep = require('@f/sleep')
 
 /**
  * Tests
@@ -15,7 +14,7 @@ const sleep = require('@f/sleep')
 
 test('go should run async and return', (t) => {
 
-  dispatch(function * () {
+  run(function * () {
     const p = yield go(function * () {
       yield delay(10)
       return 'foo'
@@ -29,7 +28,7 @@ test('go should run async and return', (t) => {
 })
 
 test('join should wait on multiple', (t) => {
-  dispatch(function * () {
+  run(function * () {
     const p1 = yield go(function * () {
       yield delay(10)
       return 'foo'
@@ -46,7 +45,7 @@ test('join should wait on multiple', (t) => {
 })
 
 test('join should selct fastest', (t) => {
-  dispatch(function * () {
+  run(function * () {
     const p1 = yield go(function * () {
       yield delay(20)
     })
@@ -65,7 +64,7 @@ test('join should selct fastest', (t) => {
 })
 
 test('should kill ongoing gos', (t) => {
-  dispatch(function * () {
+  run(function * () {
     const ended = []
     const p1 = yield go(function * () {
       yield delay(200)
@@ -80,6 +79,18 @@ test('should kill ongoing gos', (t) => {
     t.equal(err.message, 'STOP_EXECUTION')
     yield delay(200)
     t.equal(ended.length, 0)
+    t.end()
+  })
+})
+
+test('should run sync foreach', (t) => {
+  run(function * () {
+    const vals = []
+    yield forEach(function * (val) {
+      yield delay(50)
+      vals.push(val)
+    }, [1, 2, 3])
+    t.deepEquals(vals,[1, 2, 3])
     t.end()
   })
 })
