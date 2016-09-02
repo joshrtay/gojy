@@ -5,8 +5,7 @@
 require("babel-polyfill")
 
 const test = require('tape')
-const {run, go, join, poss, delay, select, kill, forEach} = require('..')
-const bind = require('@f/bind-middleware')
+const {run, go, join, poss, delay, select, kill, forEach, map, now} = require('..')
 
 /**
  * Tests
@@ -90,7 +89,59 @@ test('should run sync foreach', (t) => {
       yield delay(50)
       vals.push(val)
     }, [1, 2, 3])
-    t.deepEquals(vals,[1, 2, 3])
+    t.deepEquals(vals, [1, 2, 3])
+    t.end()
+  })
+})
+
+test('should run sync foreach on object', (t) => {
+  run(function * () {
+    const vals = []
+    const [err] = yield poss(forEach(function * (val) {
+      yield delay(50)
+      vals.push(val)
+    }, {a: 1, b: 2, c: 3}))
+
+    t.deepEquals(vals, [1, 2, 3])
+    t.end()
+  })
+})
+
+test('should run sync map on array', (t) => {
+  run(function * () {
+    const [err, vals] = yield poss(map(function * (val) {
+      yield delay(50)
+      return val + 1
+    }, [1, 2, 3]))
+    t.deepEquals(vals, [2, 3, 4])
+    t.end()
+  })
+})
+
+test('should run sync map on object', (t) => {
+  run(function * () {
+    const [err, vals] = yield poss(map(function * (val) {
+      yield delay(50)
+      return val + 1
+    }, {a: 1, b: 2, c: 3}))
+    t.deepEquals(vals, {a: 2, b: 3, c: 4})
+    t.end()
+  })
+})
+
+test('should run processes in parallel with now', (t) => {
+  run(function * () {
+    const res = yield now({
+      a: function * () {
+        yield delay(50)
+        return 1
+      },
+      b: function * () {
+        yield delay(50)
+        return 2
+      }
+    })
+    t.deepEquals(res, {a: 1, b: 2})
     t.end()
   })
 })
